@@ -1,5 +1,10 @@
 # Taller Semana 3 — Demanda por sede (cadena nacional) 🏢📊
 
+# Integrantes
+* Juan Felipe Sanchez
+* Nicolas Sotelo
+* Zary Velasco
+
 Bienvenido al repositorio del taller. **Empieza leyendo [`ENUNCIADO_TALLER.md`](ENUNCIADO_TALLER.md)** —
 ahí está la historia, la misión, el contrato de entrega y la rúbrica.
 
@@ -17,6 +22,8 @@ demanda-sede-ml/
 ```
 
 ## Cómo arrancar
+
+**Versión Python:** Python 3.13.14 
 
 ```bash
 # 1. Entorno virtual
@@ -40,3 +47,20 @@ python src/entrenar.py
 
 Al final, el profesor evaluará tu `predict.py` contra un conjunto de datos oculto y
 publicará el leaderboard. Éxitos 🚀
+
+
+
+# Auditoría
+
+### Fase 1:
+**Trampa 1:** Se eliminan las variables `llovio` e `ingreso_dia` de `entrenar.py` dado que, a las 6 de la mañana el sistema ERP no tiene clara la información, además `ingreso_dia` es una fuga directa porque los ingresos se calculan a partir de la cantidad de almuerzos y su precio, y el modelo podría simplemente despejar la variable para definir la cantidad de almuerzos. Adicionalmente la pista que delata `ingreso_dia` es el comentario que deja en los features el analista junior.
+
+**Trampa 2:** Se realiza el escalamiento antes de separar los datos de entrenamiento y los datos de prueba, primero se aplica el `fit_transform` a todas las features y luego si se separan, lo cual es incorrecto
+
+**Trampa 3:** Se presenta división aleatoria de una serie temporal ya que la función `train_test_split` usa por defecto `Shuffle = TRUE` lo que hace que la información se tome aleatoriamente y que se utilice el futuro para predecir el pasado al momento de probar el modelo
+
+Las 3 trampas generan que la cantidad de almuerzos estimada se infle
+
+### Fase 2:
+
+# Nuestro MAE honesto
