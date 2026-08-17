@@ -21,9 +21,9 @@ demanda-sede-ml/
 └── README.md              # este archivo
 ```
 
-## Cómo arrancar
+## Cómo arrancar / Requisitos
 
-**Versión Python:** Python 3.13.14 
+**Versión de Python utilizada:** Python 3.13.14 
 
 ```bash
 # 1. Entorno virtual
@@ -82,12 +82,26 @@ En la gráfica se observa que la cantidad de almuerzos diarios varia considerabl
 
 # Fase 3
 
+Se implementa la siguiente interfaz, para ejecutar el modelo según los datos con fechas futuras para predecir la cantidad de almuerzo que deberían prepararse:
+
+```bash
+python src/predict.py <ruta_features.csv> <ruta_salida.csv>
+```
+
+Para nuestra prueba, se creó el archivo `test.csv` con las últimas 35 filas del original (`almuerzos_entrenamiento.csv`), y se almacenó en la carpeta `data`. Además, se alojó el resultado de la predicción en el archivo `prediccion.csv` con las columnas `fecha` y `prediccion`, que se encuentra en la carpeta `resultado`.  
+
+Para ello, el comando ejecutado en nuestra prueba fue:  
+
+```bash
+python src/predict.py data/test.csv resultado/prediccion.csv
+```
 
 
-Pistas
-El negocio no es el mismo de hace seis meses: mira la serie completa en una gráfica antes de decidir tus features. El tiempo también es información (y a escala nacional, las tendencias mueven millones).
+# Respuesta MAE final
 
-Prueba tu predict.py tú mismo: separa los últimos días de tu CSV como "conjunto oculto casero" y verifica que el contrato corre de punta a punta.
+*Defensa garantizada al final: "¿por qué tu MAE es PEOR que el del analista junior, y por qué eso es una buena noticia para la empresa?"* 
 
-Defensa garantizada al final: "¿por qué tu MAE es PEOR que el del analista junior, y por qué eso es una buena noticia para la empresa?"
+**Respuesta:** El MAE final (10.1 almuerzos) es peor que el de el analista junior, pero representa una buena noticia para la empresa porque considera un rigor y honestidad metodológica para hacer un tratamiento adecuado de los datos, y presentar una estimación más precisa de los almuerzos que deben ser preparados.
+
+Por un lado, no considera las variables `ingreso_dia` y `llovio`, ya que estas generan fuga de datos, al ser información diaria, extraída al final de cada día, que no se tiene al momento de realizar una predicción futura. Sumado a esto, se ajusta la lógica para realizar el escalamiento a los datos de entrenamiento únicamente, y no a los datos de prueba, como lo hacía el analista junior. 
 

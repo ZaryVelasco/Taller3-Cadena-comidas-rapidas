@@ -15,7 +15,5 @@ def main(ruta_test, ruta_salida):
     pd.DataFrame({"fecha": test["fecha"].dt.date, "prediccion": pred.round(1)}).to_csv(ruta_salida, index=False)
     print(f"{len(test)} proyecciones -> {ruta_salida}")
     
-
-
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])
