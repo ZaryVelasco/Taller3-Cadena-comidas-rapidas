@@ -63,4 +63,21 @@ Las 3 trampas generan que la cantidad de almuerzos estimada se infle
 
 ### Fase 2:
 
+- Se agrega el pipeline y el preprocesamiento de las variables en el archivo `model.py`
+
+
+Fase 2 — El modelo honesto.
+Solo features conocibles ANTES del día a predecir (las que el ERP tiene disponibles al cierre del día anterior). 
+
+`Pipeline + ColumnTransformer` de sklearn: el preprocesamiento aprende (fit) únicamente del entrenamiento — leak imposible por construcción, y el mismo objeto escala a millones de filas sin reescribir nada.
+Validación temporal: el "examen interno" son los últimos N días de tus datos, no un split aleatorio. Estás prediciendo el futuro de la operación; valídate contra el futuro.
+Reporta tu MAE honesto en el README. Debería parecerse al del leaderboard.
+
+Pistas
+El negocio no es el mismo de hace seis meses: mira la serie completa en una gráfica antes de decidir tus features. El tiempo también es información (y a escala nacional, las tendencias mueven millones).
+
+Prueba tu predict.py tú mismo: separa los últimos días de tu CSV como "conjunto oculto casero" y verifica que el contrato corre de punta a punta.
+
+Defensa garantizada al final: "¿por qué tu MAE es PEOR que el del analista junior, y por qué eso es una buena noticia para la empresa?"
+
 # Nuestro MAE honesto
