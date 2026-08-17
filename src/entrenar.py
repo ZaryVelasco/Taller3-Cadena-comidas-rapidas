@@ -13,7 +13,8 @@ RUTA = Path(__file__).parent.parent / "data" / "almuerzos_entrenamiento.csv"
 
 df = pd.read_csv(RUTA, parse_dates=["fecha"])
 
-FEATURES = ["temperatura_c", "precio", "es_quincena", "dia_semana"]
+FEATURES = ["temperatura_c", "llovio", "precio", "es_quincena", "dia_semana",
+            "ingreso_dia"]  # el ingreso del dia ayuda MUCHISIMO al modelo ;)
 
 X = df[FEATURES]
 y = df["almuerzos"]
