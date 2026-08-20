@@ -23,7 +23,9 @@ demanda-sede-ml/
 
 ## Cómo arrancar / Requisitos
 
-**Versión de Python utilizada:** Python 3.13.14 
+* **Versión de Python utilizada para desarrollo:** `Python 3.14.3`
+* **Compatibilidad de Python:** `Python >= 3.11` (Soportado en Python 3.11, 3.12, 3.13 y 3.14).
+* **Nota sobre dependencias:** Las versiones de las librerías especificadas en `requirements.txt` (como `pandas==3.0.2`, `numpy==2.4.4`, `matplotlib==3.11.1` y `scikit-learn==1.8.0`) requieren **Python 3.11 o superior**. No son compatibles con Python 3.10 o inferior debido a los requerimientos base de los paquetes en PyPI.
 
 ```bash
 # 1. Entorno virtual
